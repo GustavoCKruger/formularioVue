@@ -1,35 +1,42 @@
 <script setup>
-import { computed, ref } from 'vue';
 
-const nome = ref('');
-const idade = ref('');
-const email = ref('');
+import { ref } from 'vue';
+
+const usuario = ref({
+  nome: '',
+  idade: '',
+  email: ''
+});
 
 function enviar() {
-  if (nome.value <= 3) {
-    alert("a");
+  alert(`Seus dados são: \nNome: ${usuario.value.nome} \nIdade: ${usuario.value.idade} \nEmail: ${usuario.value.email}`)
+
+  if (usuario.value.idade < 18 || usuario.value.idade > 60) {
+    alert(`Arrume sua idade`)
   }
 }
+
 </script>
 
 <template>
-  <div class="form">
+  <form>
     <div class="nome">
-      <p>Nome:</p>
-      <input type="text" v-model="nome" minlength="3" maxlength="20" placeholder="Digite seu nome">
+      <label for="nome">Nome:</label>
+      <input type="text" name="nome" id="nome" v-model="usuario.nome" placeholder="Insira seu nome aqui">
     </div>
-    <p>Idade:</p>
+
     <div class="idade">
-      <input type="number" v-model="idade">
+      <label for="idade">Idade:</label>
+      <input type="number" name="idade" id="idade" v-model="usuario.idade">
     </div>
+
     <div class="email">
-      <p>Email:</p>
-      <input type="email" v-model="email" placeholder="Digite um email válido">
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" v-model="usuario.email" placeholder="Insira seu email aqui">
     </div>
-    <div class="enviar">
-      <input type="button" value="Enviar" @click="enviar()">
-    </div>
-  </div>
+
+    <button type="submit" @click="enviar()">Enviar</button>
+  </form>
 </template>
 
 <style scoped></style>
